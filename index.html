@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ブラウザゲームまとめサイト</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Noto Sans JP", sans-serif;
+    }
+
+    body {
+      background-color: #f4f4f4;
+      color: #111;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #0077cc;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .search-filter {
+      max-width: 1200px;
+      margin: 20px auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 0 10px;
+    }
+
+    .search-filter input, .search-filter select {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      flex: 1;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .game-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s;
+    }
+
+    .game-card:hover {
+      transform: scale(1.03);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .game-card .content {
+      padding: 15px;
+      flex-grow: 1;
+    }
+
+    .game-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      color: #0077cc;
+    }
+
+    .game-card p {
+      flex-grow: 1;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .game-card a {
+      display: inline-block;
+      text-align: center;
+      background-color: #0077cc;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+
+    .game-card a:hover {
+      background-color: #005fa3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #222;
+      color: #fff;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.1rem;
+      }
+      .search-filter {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ブラウザゲームまとめ</h1>
+    <nav>
+      <a href="#action">アクション</a>
+      <a href="#puzzle">パズル</a>
+      <a href="#rpg">RPG</a>
+    </nav>
+  </header>
+
+  <div class="search-filter">
+    <input type="text" id="search" placeholder="ゲーム名で検索">
+    <select id="categoryFilter">
+      <option value="all">すべてのカテゴリ</option>
+      <option value="action">アクション</option>
+      <option value="puzzle">パズル</option>
+      <option value="rpg">RPG</option>
+    </select>
+  </div>
+
+  <main id="gameList">
+    <div class="game-card" data-category="action">
+      <img src="https://via.placeholder.com/300x150.png?text=Game+1" alt="ゲーム1">
+      <div class="content">
+        <h3>ゲームタイトル1</h3>
+        <p>このゲームは楽しいアクションゲームです。敵を倒してステージをクリアしましょう！</p>
+        <a href="#">プレイする</a>
+      </div>
+    </div>
+
+    <div class="game-card" data-category="puzzle">
+      <img src="https://via.placeholder.com/300x150.png?text=Game+2" alt="ゲーム2">
+      <div class="content">
+        <h3>ゲームタイトル2</h3>
+        <p>頭を使うパズルゲームです。ステージごとに異なる難題を解き明かそう。</p>
+        <a href="#">プレイする</a>
+      </div>
+    </div>
+
+    <div class="game-card" data-category="rpg">
+      <img src="https://via.placeholder.com/300x150.png?text=Game+3" alt="ゲーム3">
+      <div class="content">
+        <h3>ゲームタイトル3</h3>
+        <p>RPG形式の冒険ゲーム。キャラクターを育ててダンジョンを攻略しよう。</p>
+        <a href="#">プレイする</a>
+      </div>
+    </div>
+
+    <div class="game-card" data-category="action">
+      <img src="https://via.placeholder.com/300x150.png?text=Game+4" alt="ゲーム4">
+      <div class="content">
+        <h3>ゲームタイトル4</h3>
+        <p>激しいアクションで敵を倒すシューティングゲームです。</p>
+        <a href="#">プレイする</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 ブラウザゲームまとめサイト
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById('search');
+    const categorySelect = document.getElementById('categoryFilter');
+    const gameCards = document.querySelectorAll('.game-card');
+
+    function filterGames() {
+      const searchText = searchInput.value.toLowerCase();
+      const selectedCategory = categorySelect.value;
+
+      gameCards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const category = card.dataset.category;
+
+        if ((title.includes(searchText) || searchText === '') &&
+            (selectedCategory === 'all' || selectedCategory === category)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', filterGames);
+    categorySelect.addEventListener('change', filterGames);
+  </script>
+</body>
+</html>
