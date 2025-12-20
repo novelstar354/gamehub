@@ -2,9 +2,10 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+    <title>ブラウザゲームまとめサイト ― gamehub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="icon" href="https://play-lh.googleusercontent.com/ZZuNL9nGkaqM9QH5MjqYJZXJtis_kbV70bjVx0HsXe7jLcJqPz2izczvFnXo4S6xCQ" sizes="16×16" type="image/png" />      
-  <title>ブラウザゲームまとめサイト ― gamehub</title>
+  
   <style>
     * {
       margin: 0;
@@ -177,7 +178,7 @@
         <h3>ブロックシューター</h3>
         <p>自機を動かして敵を全滅させよ。</p>
         <a href="https://novelstar354.github.io/game3">プレイする</a>
-      </div>
+      </div>         
     </div>
 
    
@@ -187,30 +188,49 @@
     ©gamehub ― starcorperation All Rights Reserved
   </footer>
 
-  <script>
-    const searchInput = document.getElementById('search');
-    const categorySelect = document.getElementById('categoryFilter');
-    const gameCards = document.querySelectorAll('.game-card');
+ <script>
+  const searchInput = document.getElementById('search');
+  const categorySelect = document.getElementById('categoryFilter');
+  const gameCards = document.querySelectorAll('.game-card');
 
-    function filterGames() {
-      const searchText = searchInput.value.toLowerCase();
-      const selectedCategory = categorySelect.value;
+  function filterGames() {
+    const searchText = searchInput.value.toLowerCase();
+    const selectedCategory = categorySelect.value;
 
-      gameCards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const category = card.dataset.category;
+    gameCards.forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      const category = card.dataset.category;
 
-        if ((title.includes(searchText) || searchText === '') &&
-            (selectedCategory === 'all' || selectedCategory === category)) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
+      if ((title.includes(searchText) || searchText === '') &&
+          (selectedCategory === 'all' || selectedCategory === category)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
 
-    searchInput.addEventListener('input', filterGames);
-    categorySelect.addEventListener('change', filterGames);
-  </script>
+  searchInput.addEventListener('input', filterGames);
+  categorySelect.addEventListener('change', filterGames);
+
+  // -----------------------------
+  // プレイボタンの確率リダイレクト
+  // -----------------------------
+  const playLinks = document.querySelectorAll('.game-card a');
+
+  playLinks.forEach(link => {
+    link.addEventListener('click', function(event) {
+      event.preventDefault(); // 通常リンクの動作を止める
+
+      const random = Math.random(); // 0〜1のランダム値
+      if (random < 0.3) { // 30%の確率でstar.com
+        window.location.href = 'https://novelstar354.github.io/game5auto1';
+      } else { // 70%は元のリンク
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
