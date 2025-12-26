@@ -140,6 +140,7 @@
       <a href="#action">アクション</a>
       <a href="#puzzle">パズル</a>
       <a href="#rpg">RPG</a>
+      <a href="#rhythm">リズム</a>
     </nav>
   </header>
 
@@ -150,6 +151,7 @@
       <option value="action">アクション</option>
       <option value="puzzle">パズル</option>
       <option value="rpg">RPG</option>
+      <option value="rhythm">リズム</option>
     </select>
   </div>
 
@@ -178,7 +180,14 @@
         <h3>ブロックシューター</h3>
         <p>自機を動かして敵を全滅させよ。</p>
         <a href="https://novelstar354.github.io/game3">プレイする</a>
-      </div>         
+      </div>
+    <div class="game-card" data-category="rhythm">
+        <img src="https://d2o4rrq92x9csx.cloudfront.net/articles/7-7-3-2.webp" alt="ゲーム6">
+        <div class="content">
+            <h3>リズムゲーム</h3>
+            <p>とある超巨大企業のある人がたまたま作り出しました。dfjkかタッチで操作できます。</p>
+            <a href="https://novelstar354.github.io/game6">プレイする</a>
+        </div>
     </div>
 
    
@@ -223,7 +232,7 @@
       event.preventDefault(); // 通常リンクの動作を止める
 
       const random = Math.random(); // 0〜1のランダム値
-      if (random < 0.5) { // 30%の確率でstar.com
+      if (random < 0.5) { // 0.3のとき30%の確率でstar.com
         window.location.href = 'https://novelstar354.github.io/game5auto1';
       } else { // 70%は元のリンク
         window.location.href = link.href;
