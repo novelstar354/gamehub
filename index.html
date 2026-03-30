@@ -131,6 +131,55 @@
         flex-direction: column;
       }
     }
+/* バナー初期は透明 */
+.banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: white;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 25px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  opacity: 0;             /* 初期は透明 */
+  transition: opacity 1s ease-in-out; /* フェードイン */
+}
+
+.banner.show {
+  opacity: 1; /* フェードイン */
+}
+
+.banner-text {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.banner-btn {
+  background: white;
+  color: #0072ff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.banner-btn:hover {
+  background: #e0e0e0;
+}
+
+.close-btn {
+  margin-left: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
   </style>
 </head>
 <body>
@@ -497,7 +546,16 @@
               <a href="https://novelstar354.github.io/game63">プレイする</a>
               </div>
           </div>
-      　　　
+      　　　<div class="banner" id="banner">
+  <div class="banner-text">
+    📝 アンケート実施中！ご協力ください
+  </div>
+
+  <div>
+    <button class="banner-btn" onclick="startSurvey()">回答する</button>
+    <span class="close-btn" onclick="closeBanner()">×</span>
+  </div>
+</div>
       <!--
       
       <div class="game-card" data-category="">
@@ -558,6 +616,25 @@
       }
     });
   });
+
+
+     
+    // ページ読み込み後にフェードイン
+window.addEventListener("load", () => {
+  const banner = document.getElementById("banner");
+  setTimeout(() => {
+    banner.classList.add("show");
+  }, 500); // 0.5秒後にフェードイン開始
+});
+
+function startSurvey() {
+  location.href = "https://novelstar354.github.io/oqs";
+}
+
+function closeBanner() {
+  const banner = document.getElementById("banner");
+  banner.style.display = "none";
+}
 </script>
 </body>
 </html>
